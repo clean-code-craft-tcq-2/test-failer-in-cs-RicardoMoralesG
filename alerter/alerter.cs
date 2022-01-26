@@ -1,12 +1,21 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace AlerterSpace {
     class Alerter {
         static int alertFailureCount = 0;
         static int networkAlertStub(float celcius) {
-            Console.WriteLine("ALERT: Temperature is {0} celcius", celcius);
+
+            if (celcius >= 150f)
+            {
+                Console.WriteLine("ALERT: Temperature is {0} celcius", celcius);
+
+                // Return 500 for not-ok
+                return 500;
+            }
+          
             // Return 200 for ok
-            // Return 500 for not-ok
+            
             // stub always succeeds and returns 200
             return 200;
         }
@@ -26,6 +35,8 @@ namespace AlerterSpace {
             alertInCelcius(303.6f);
             Console.WriteLine("{0} alerts failed.", alertFailureCount);
             Console.WriteLine("All is well (maybe!)\n");
+
+            Debug.Assert(alertFailureCount > 0);
         }
     }
 }
