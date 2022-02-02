@@ -17,12 +17,11 @@ namespace MisalignedSpace {
             int totalToPrint = majorColors.Length * minorColors.Length;
 
            
-            //Check  alignment 
-            Debug.Assert(printData[0].print.Length == printData[totalToPrint - 1].print.Length);
             //verifi total colors
             Debug.Assert(printData.Count == totalToPrint);
             //validate print data
-            Debug.Assert(printColorsValid(printData));
+            Debug.Assert(printColorsValid(printData) == true);
+
 
             Console.WriteLine("All is well (maybe!)");
         }
@@ -63,26 +62,27 @@ namespace MisalignedSpace {
         {
             string ColorMinor = "";
 
-            bool printValid = true;
+            bool printValid = false;
 
-            int l = 0;
+            int j = 0;
             do
             {
-                l++;
+                j++;
 
-                if (ColorMinor == printColor[l].minorColor)
+                if (ColorMinor == printColor[j].minorColor)
                 {
-                    printValid = false;
+                    printValid = true;
 
                     break;
                 }
 
-                ColorMinor = printColor[l].minorColor;
+                ColorMinor = printColor[j].minorColor;
 
-            } while (l < printColor.Count);
+            } while (j < printColor.Count);
 
 
-           
+
+
 
             return printValid;
         }

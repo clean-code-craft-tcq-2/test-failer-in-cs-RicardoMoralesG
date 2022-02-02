@@ -36,7 +36,7 @@ namespace AlerterSpace {
             Console.WriteLine("{0} alerts failed.", alertFailureCount);
             Console.WriteLine("All is well (maybe!)\n");
 
-            Debug.Assert(alertFailureCount > 0);
+            Debug.Assert(alertFailureCount == 0);
         }
     }
 }
