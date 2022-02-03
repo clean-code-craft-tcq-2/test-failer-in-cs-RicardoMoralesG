@@ -1,23 +1,92 @@
-﻿using System;
+﻿using misaligned;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace MisalignedSpace {
     class Misaligned {
-        static int printColorMap() {
-            string[] majorColors = {"White", "Red", "Black", "Yellow", "Violet"};
-            string[] minorColors = {"Blue", "Orange", "Green", "Brown", "Slate"};
+
+       
+        static void Main(string[] args) {
+
+            List<PrintColor> printData = printColorsMap();
+
+            string[] majorColors = { "White", "Red", "Black", "Yellow", "Violet" };
+            string[] minorColors = { "Blue", "Orange", "Green", "Brown", "Slate" };
+
+            int totalToPrint = majorColors.Length * minorColors.Length;
+
+           
+            //verifi total colors
+            Debug.Assert(printData.Count == totalToPrint);
+            //validate print data
+            Debug.Assert(printColorsValid(printData));
+
+            Debug.Assert(printData[0].print.Length == printData[totalToPrint - 1].print.Length);
+
+
+            Console.WriteLine("All is well (maybe!)");
+        }
+
+
+
+       
+
+        static List<PrintColor> printColorsMap()
+        {
+
+            List<PrintColor> listColorsPrinted = new List<PrintColor>();
+
+            string[] majorColors = { "White", "Red", "Black", "Yellow", "Violet" };
+            string[] minorColors = { "Blue", "Orange", "Green", "Brown", "Slate" };
             int i = 0, j = 0;
-            for(i = 0; i < 5; i++) {
-                for(j = 0; j < 5; j++) {
-                    Console.WriteLine("{0} | {1} | {2}", i * 5 + j, majorColors[i], minorColors[i]);
+            for (i = 0; i < 5; i++)
+            {
+                for (j = 0; j < 5; j++)
+                {
+
+                    listColorsPrinted.Add(
+                        new PrintColor
+                        {
+                            majorColor = majorColors[i],
+                            minorColor = minorColors[i],
+                            print = String.Format("{0} | {1} | {2}", i * 5 + j, majorColors[i], minorColors[j])
+
+                        });
+                    Console.WriteLine("{0} | {1} | {2}", i * 5 + j, majorColors[i], minorColors[j]);
                 }
             }
-            return i * j;
+            return listColorsPrinted;
         }
-        static void Main(string[] args) {
-            int result = printColorMap();
-            Debug.Assert(result == 25);
-            Console.WriteLine("All is well (maybe!)");
+
+
+        static bool printColorsValid(List<PrintColor> printColor)
+        {
+            string ColorMinor = "";
+
+            bool printValid = false;
+
+            int j = 0;
+            do
+            {
+                j++;
+
+                if (ColorMinor == printColor[j].minorColor)
+                {
+                    printValid = true;
+
+                    break;
+                }
+
+                ColorMinor = printColor[j].minorColor;
+
+            } while (j < printColor.Count);
+
+
+
+
+
+            return printValid;
         }
     }
 }
