@@ -20,7 +20,9 @@ namespace MisalignedSpace {
             //verifi total colors
             Debug.Assert(printData.Count == totalToPrint);
             //validate print data
-            Debug.Assert(printColorsValid(printData) == true);
+            Debug.Assert(printColorsValid(printData));
+
+            Debug.Assert(printData[0].print.Length == printData[totalToPrint - 1].print.Length);
 
 
             Console.WriteLine("All is well (maybe!)");
@@ -48,10 +50,10 @@ namespace MisalignedSpace {
                         {
                             majorColor = majorColors[i],
                             minorColor = minorColors[i],
-                            print = String.Format("{0} | {1} | {2}", i * 5 + j, majorColors[i], minorColors[i])
+                            print = String.Format("{0} | {1} | {2}", i * 5 + j, majorColors[i], minorColors[j])
 
                         });
-                    Console.WriteLine("{0} | {1} | {2}", i * 5 + j, majorColors[i], minorColors[i]);
+                    Console.WriteLine("{0} | {1} | {2}", i * 5 + j, majorColors[i], minorColors[j]);
                 }
             }
             return listColorsPrinted;
